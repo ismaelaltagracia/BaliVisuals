@@ -1,0 +1,133 @@
+.contact {
+  background: var(--gradient-bg);
+}
+
+.contact__container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.contact__title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.contact__title .accent {
+  color: var(--color-accent);
+}
+
+.contact__text p {
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.contact__form {
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid var(--color-accent);
+  border-radius: 20px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form__group--full {
+  grid-column: span 2;
+}
+
+.form__group label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.form__group input,
+.form__group select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  color: white;
+  font-size: 0.95rem;
+  font-family: var(--font-family);
+  transition: border-color 0.3s;
+}
+
+.form__group input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form__group input:focus,
+.form__group select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form__group select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.form__group select option {
+  background: #222;
+  color: white;
+}
+
+.form__submit {
+  margin-top: 1rem;
+  padding: 1.1rem 2rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-family: var(--font-family);
+}
+
+.form__submit:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .contact__container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact__title {
+    font-size: 2rem;
+  }
+
+  .form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .form__group--full {
+    grid-column: span 1;
+  }
+
+  .contact__form {
+    padding: 1.5rem;
+  }
+}
