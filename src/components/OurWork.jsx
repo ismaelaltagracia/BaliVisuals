@@ -27,7 +27,7 @@ function OurWork() {
         <div className="ourwork__client-logo">
           <img src="/Logos clientes/Elite.png" alt="Elite Realty Group" />
         </div>
-        <div className="ourwork__client-logo">
+        <div className="ourwork__client-logo ourwork__client-logo--lg">
           <img src="/Logos clientes/PradoAltoLogo.png" alt="Prado Alto" />
         </div>
         <div className="ourwork__client-logo">

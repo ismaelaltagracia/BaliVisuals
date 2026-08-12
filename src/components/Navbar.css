@@ -4,7 +4,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: transparent;
+  background: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(12px);
 }
 
 .navbar__container {

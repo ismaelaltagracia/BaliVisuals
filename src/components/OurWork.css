@@ -66,6 +66,10 @@
   filter: grayscale(0%) brightness(1);
 }
 
+.ourwork__client-logo--lg {
+  height: 90px;
+}
+
 .ourwork__gallery {
   display: flex;
   gap: 1rem;
