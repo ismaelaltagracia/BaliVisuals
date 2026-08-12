@@ -1,17 +1,32 @@
 .contact {
-  background: var(--gradient-bg);
+  background: var(--color-bg);
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact__gradient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(ellipse at right top, rgba(228, 58, 79, 0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .contact__container {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.3fr;
   gap: 4rem;
   align-items: center;
+  position: relative;
 }
 
 .contact__title {
+  font-family: var(--font-heading);
   font-size: 2.8rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
   margin-bottom: 1.5rem;
 }
@@ -20,20 +35,21 @@
   color: var(--color-accent);
 }
 
-.contact__text p {
+.contact__desc {
   color: var(--color-text-muted);
-  font-size: 1.1rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
 .contact__form {
-  background: rgba(30, 30, 30, 0.6);
+  background: rgba(30, 30, 30, 0.5);
   border: 1px solid var(--color-accent);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  backdrop-filter: blur(10px);
 }
 
 .form__row {
@@ -48,30 +64,26 @@
   gap: 0.5rem;
 }
 
-.form__group--full {
-  grid-column: span 2;
-}
-
 .form__group label {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--color-text-muted);
   font-weight: 500;
 }
 
 .form__group input,
 .form__group select {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 0.9rem 1rem;
   color: white;
-  font-size: 0.95rem;
-  font-family: var(--font-family);
+  font-size: 0.92rem;
+  font-family: var(--font-body);
   transition: border-color 0.3s;
 }
 
 .form__group input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.25);
 }
 
 .form__group input:focus,
@@ -86,22 +98,22 @@
 }
 
 .form__group select option {
-  background: #222;
+  background: #1a1a1a;
   color: white;
 }
 
 .form__submit {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   padding: 1.1rem 2rem;
   background: var(--color-accent);
   color: white;
   border: none;
-  border-radius: 30px;
-  font-size: 1.1rem;
+  border-radius: 50px;
+  font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
 }
 
 .form__submit:hover {
@@ -112,7 +124,7 @@
 @media (max-width: 768px) {
   .contact__container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .contact__title {
@@ -121,10 +133,6 @@
 
   .form__row {
     grid-template-columns: 1fr;
-  }
-
-  .form__group--full {
-    grid-column: span 1;
   }
 
   .contact__form {

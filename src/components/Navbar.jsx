@@ -13,14 +13,13 @@ function Navbar() {
 
         <nav className={`navbar__nav ${menuOpen ? 'active' : ''}`}>
           <ul className="navbar__links">
-            <li><a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a></li>
-            <li><a href="#nosotros" onClick={() => setMenuOpen(false)}>Nosotros</a></li>
+            <li><a href="#inicio" className="active" onClick={() => setMenuOpen(false)}>Inicio</a></li>
+            <li><a href="#ourwork" onClick={() => setMenuOpen(false)}>Our Work</a></li>
             <li><a href="#servicios" onClick={() => setMenuOpen(false)}>Servicios</a></li>
-            <li><a href="#portafolio" onClick={() => setMenuOpen(false)}>Portafolio</a></li>
+            <li><a href="#nosotros" onClick={() => setMenuOpen(false)}>Nosotros</a></li>
+            <li><a href="#contacto" onClick={() => setMenuOpen(false)}>Contacto</a></li>
           </ul>
         </nav>
-
-        <a href="#contacto" className="navbar__cta">Contáctanos</a>
 
         <button
           className={`navbar__toggle ${menuOpen ? 'active' : ''}`}

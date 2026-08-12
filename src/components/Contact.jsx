@@ -16,18 +16,18 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission
     console.log('Form submitted:', formData)
   }
 
   return (
     <section id="contacto" className="contact">
+      <div className="contact__gradient"></div>
       <div className="contact__container container">
         <div className="contact__text">
           <h2 className="contact__title">
             Te ayudamos a <span className="accent">capturar<br />la esencia</span> de tu proyecto
           </h2>
-          <p>
+          <p className="contact__desc">
             Cuéntanos sobre tu marca o evento y diseñemos juntos el contenido visual
             que necesitas para conectar con tu audiencia. Te responderemos con una
             propuesta de fotografía y video adaptada exactamente a lo que buscas transmitir.
@@ -87,7 +87,7 @@ function Contact() {
             </div>
           </div>
 
-          <div className="form__group form__group--full">
+          <div className="form__group">
             <label htmlFor="service">Servicio a requerir</label>
             <select
               id="service"
