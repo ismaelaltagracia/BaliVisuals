@@ -55,21 +55,8 @@ function Hero() {
           whileTap={{ scale: 0.95 }}
         >
           Contáctanos
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
         </motion.a>
 
-        <motion.div
-          className="hero__scroll-indicator"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-        >
-          <div className="hero__scroll-mouse">
-            <div className="hero__scroll-wheel"></div>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

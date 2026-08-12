@@ -82,7 +82,8 @@
 }
 
 .form__group input,
-.form__group select {
+.form__group select,
+.form__group textarea {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--color-border);
   border-radius: 12px;
@@ -93,15 +94,33 @@
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.form__group input::placeholder {
+.form__group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form__group input::placeholder,
+.form__group textarea::placeholder {
   color: rgba(255, 255, 255, 0.25);
 }
 
 .form__group input:focus,
-.form__group select:focus {
+.form__group select:focus,
+.form__group textarea:focus {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgba(228, 58, 79, 0.1);
+}
+
+.form__budget-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form__currency {
+  width: 80px;
+  flex-shrink: 0;
+  text-align: center;
 }
 
 .form__group select {
@@ -126,11 +145,45 @@
   cursor: pointer;
   font-family: var(--font-body);
   box-shadow: 0 4px 25px rgba(228, 58, 79, 0.35);
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
 }
 
 .form__submit:hover {
   box-shadow: 0 8px 40px rgba(228, 58, 79, 0.5);
+}
+
+.form__submit:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.form__submit--success {
+  background: white;
+  color: var(--color-accent);
+  box-shadow: 0 4px 25px rgba(255, 255, 255, 0.2);
+}
+
+.form__spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.form__success {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
