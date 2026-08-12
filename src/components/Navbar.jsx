@@ -1,11 +1,47 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import './Navbar.css'
+
+const sections = ['inicio', 'ourwork', 'servicios', 'nosotros', 'contacto']
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('inicio')
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+
+      // Detect active section
+      const scrollPos = window.scrollY + 200
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i])
+        if (section && section.offsetTop <= scrollPos) {
+          setActiveSection(sections[i])
+          break
+        }
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const navItems = [
+    { id: 'inicio', label: 'Inicio' },
+    { id: 'ourwork', label: 'Our Work' },
+    { id: 'servicios', label: 'Servicios' },
+    { id: 'nosotros', label: 'Nosotros' },
+    { id: 'contacto', label: 'Contacto' },
+  ]
 
   return (
-    <header className="navbar">
+    <motion.header
+      className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
       <div className="navbar__container container">
         <a href="#inicio" className="navbar__logo">
           <img src="/logo-blanco-rojo.svg" alt="Bali Visuals" className="navbar__logo-img" />
@@ -13,11 +49,17 @@ function Navbar() {
 
         <nav className={`navbar__nav ${menuOpen ? 'active' : ''}`}>
           <ul className="navbar__links">
-            <li><a href="#inicio" className="active" onClick={() => setMenuOpen(false)}>Inicio</a></li>
-            <li><a href="#ourwork" onClick={() => setMenuOpen(false)}>Our Work</a></li>
-            <li><a href="#servicios" onClick={() => setMenuOpen(false)}>Servicios</a></li>
-            <li><a href="#nosotros" onClick={() => setMenuOpen(false)}>Nosotros</a></li>
-            <li><a href="#contacto" onClick={() => setMenuOpen(false)}>Contacto</a></li>
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  className={activeSection === item.id ? 'active' : ''}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
 
@@ -31,7 +73,7 @@ function Navbar() {
           <span></span>
         </button>
       </div>
-    </header>
+    </motion.header>
   )
 }
 

@@ -11,7 +11,7 @@
   right: 0;
   width: 50%;
   height: 100%;
-  background: radial-gradient(ellipse at right center, rgba(228, 58, 79, 0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse at right center, rgba(228, 58, 79, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -26,12 +26,16 @@
 
 .about__main-title .accent {
   color: var(--color-accent);
+  background: linear-gradient(135deg, #e43a4f, #ff6b7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3.5rem 5rem;
+  gap: 3rem 5rem;
   position: relative;
   margin-bottom: 6rem;
 }
@@ -40,6 +44,15 @@
   display: flex;
   gap: 1.2rem;
   align-items: flex-start;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.about__benefit:hover {
+  border-color: rgba(228, 58, 79, 0.2);
+  background: rgba(228, 58, 79, 0.03);
 }
 
 .about__benefit-icon {
@@ -50,6 +63,8 @@
   align-items: center;
   justify-content: center;
   color: var(--color-accent);
+  background: rgba(228, 58, 79, 0.08);
+  border-radius: 12px;
 }
 
 .about__benefit-content {
@@ -86,6 +101,10 @@
 
 .about__team-title .accent {
   color: var(--color-accent);
+  background: linear-gradient(135deg, #e43a4f, #ff6b7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .about__team-video {
@@ -93,12 +112,46 @@
   overflow: hidden;
   background: rgba(40, 40, 40, 0.5);
   border: 1px solid var(--color-border);
+  transition: border-color 0.3s;
+  position: relative;
 }
 
-.about__team-placeholder {
+.about__team-video:hover {
+  border-color: rgba(228, 58, 79, 0.3);
+}
+
+.about__team-reel {
   width: 100%;
-  padding-bottom: 45%;
-  background: linear-gradient(135deg, rgba(40, 40, 40, 0.8), rgba(60, 60, 60, 0.4));
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+}
+
+.about__team-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 2;
+}
+
+.about__team-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: white;
+}
+
+.about__team-badge-icon {
+  color: var(--color-accent);
+  font-size: 0.7rem;
 }
 
 @media (max-width: 768px) {
@@ -108,14 +161,10 @@
 
   .about__grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .about__team-title {
     font-size: 2rem;
-  }
-
-  .about__team-placeholder {
-    padding-bottom: 60%;
   }
 }

@@ -11,7 +11,7 @@
   right: 0;
   width: 50%;
   height: 100%;
-  background: radial-gradient(ellipse at right center, rgba(228, 58, 79, 0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse at right center, rgba(228, 58, 79, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -30,6 +30,10 @@
 
 .services__main-title .accent {
   color: var(--color-accent);
+  background: linear-gradient(135deg, #e43a4f, #ff6b7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services__item {
@@ -49,18 +53,44 @@
   overflow: hidden;
   aspect-ratio: 3 / 4;
   max-height: 500px;
+  position: relative;
 }
 
 .services__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.services__image:hover img {
+  transform: scale(1.05);
+}
+
+.services__image-glow {
+  position: absolute;
+  bottom: -20px;
+  left: 10%;
+  right: 10%;
+  height: 60px;
+  background: radial-gradient(ellipse, rgba(228, 58, 79, 0.2), transparent);
+  filter: blur(20px);
+  pointer-events: none;
 }
 
 .services__text {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
+}
+
+.services__number {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 2px;
+  opacity: 0.7;
 }
 
 .services__title {
@@ -72,6 +102,10 @@
 
 .services__title .accent {
   color: var(--color-accent);
+  background: linear-gradient(135deg, #e43a4f, #ff6b7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .services__desc {
@@ -96,27 +130,29 @@
   border-radius: 50px;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: background 0.3s, transform 0.2s;
+  transition: box-shadow 0.3s;
 }
 
 .services__btn--primary {
-  background: var(--color-accent);
+  background: linear-gradient(135deg, #e43a4f, #d42e4a);
   color: white;
+  box-shadow: 0 4px 20px rgba(228, 58, 79, 0.3);
 }
 
 .services__btn--primary:hover {
-  background: var(--color-accent-hover);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 35px rgba(228, 58, 79, 0.5);
 }
 
 .services__btn--secondary {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   color: white;
   border: 1px solid var(--color-border);
+  backdrop-filter: blur(5px);
 }
 
 .services__btn--secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(228, 58, 79, 0.4);
 }
 
 @media (max-width: 768px) {

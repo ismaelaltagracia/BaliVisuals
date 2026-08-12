@@ -1,3 +1,5 @@
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 import './About.css'
 
 const benefits = [
@@ -15,9 +17,8 @@ const benefits = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
-        <path d="M9 13l3-8 3 8"/>
-        <path d="M10 11h4"/>
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        <path d="M8 9h8M8 13h4"/>
       </svg>
     ),
     title: 'Estrategia para\nRedes Sociales',
@@ -38,7 +39,7 @@ const benefits = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
       </svg>
     ),
     title: 'Enfoque en Resultados',
@@ -47,33 +48,78 @@ const benefits = [
 ]
 
 function About() {
+  const titleRef = useRef(null)
+  const gridRef = useRef(null)
+  const teamRef = useRef(null)
+  const titleInView = useInView(titleRef, { once: true, margin: '-100px' })
+  const gridInView = useInView(gridRef, { once: true, margin: '-80px' })
+  const teamInView = useInView(teamRef, { once: true, margin: '-100px' })
+
   return (
     <section id="nosotros" className="about">
       <div className="about__gradient"></div>
       <div className="container">
-        <h2 className="about__main-title">
+        <motion.h2
+          ref={titleRef}
+          className="about__main-title"
+          initial={{ opacity: 0, y: 40 }}
+          animate={titleInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
           Por qué trabajar con <span className="accent">Bali Visuals</span>
-        </h2>
+        </motion.h2>
 
-        <div className="about__grid">
+        <div className="about__grid" ref={gridRef}>
           {benefits.map((item, index) => (
-            <div key={index} className="about__benefit">
+            <motion.div
+              key={index}
+              className="about__benefit"
+              initial={{ opacity: 0, y: 30 }}
+              animate={gridInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              whileHover={{ y: -5 }}
+            >
               <div className="about__benefit-icon">{item.icon}</div>
               <div className="about__benefit-content">
                 <h3 className="about__benefit-title">{item.title}</h3>
                 <p className="about__benefit-desc">{item.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="about__team">
-          <h2 className="about__team-title">
+        <div className="about__team" ref={teamRef}>
+          <motion.h2
+            className="about__team-title"
+            initial={{ opacity: 0, y: 30 }}
+            animate={teamInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
             Un equipo <span className="accent">dedicado a ti</span>
-          </h2>
-          <div className="about__team-video">
-            <div className="about__team-placeholder"></div>
-          </div>
+          </motion.h2>
+          <motion.div
+            className="about__team-video"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={teamInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <video
+              className="about__team-reel"
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=600&fit=crop"
+            >
+              <source src="https://cdn.coverr.co/videos/coverr-a-man-filming-with-a-camera-3609/1080p.mp4" type="video/mp4" />
+            </video>
+            <div className="about__team-overlay">
+              <div className="about__team-badge">
+                <span className="about__team-badge-icon">▶</span>
+                <span>Showreel 2026</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

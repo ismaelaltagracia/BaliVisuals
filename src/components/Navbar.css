@@ -4,8 +4,14 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(17, 17, 17, 0.95);
+  background: rgba(17, 17, 17, 0.85);
   backdrop-filter: blur(12px);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.navbar--scrolled {
+  background: rgba(17, 17, 17, 0.97);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .navbar__container {
@@ -13,7 +19,6 @@
   align-items: center;
   justify-content: space-between;
   height: 70px;
-  border-bottom: 1px solid var(--color-border);
 }
 
 .navbar__logo {

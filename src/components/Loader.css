@@ -1,0 +1,39 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.loader__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loader__logo {
+  width: 70px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(228, 58, 79, 0.5));
+}
+
+.loader__bar {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), #ff6b7a);
+  border-radius: 2px;
+  transform-origin: left;
+}
+
+.loader__text {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}

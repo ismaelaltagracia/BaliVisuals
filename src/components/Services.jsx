@@ -1,3 +1,5 @@
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 import './Services.css'
 
 const services = [
@@ -27,43 +29,83 @@ const services = [
   },
 ]
 
+function ServiceItem({ service, index }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <div className="services__item" ref={ref}>
+      <div className="services__item-inner container">
+        <motion.div
+          className="services__image"
+          initial={{ opacity: 0, x: -60, rotate: -2 }}
+          animate={isInView ? { opacity: 1, x: 0, rotate: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          whileHover={{ scale: 1.02 }}
+        >
+          <img src={service.image} alt={service.title} loading="lazy" />
+          <div className="services__image-glow"></div>
+        </motion.div>
+        <motion.div
+          className="services__text"
+          initial={{ opacity: 0, x: 60 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <span className="services__number">0{index + 1}</span>
+          <h3 className="services__title">
+            {service.title}<br />
+            <span className="accent">{service.titleAccent}</span>
+          </h3>
+          <p className="services__desc">{service.description}</p>
+          <div className="services__buttons">
+            <motion.a
+              href="#contacto"
+              className="services__btn services__btn--primary"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contáctanos
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </motion.a>
+            <motion.a
+              href="#ourwork"
+              className="services__btn services__btn--secondary"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Ver más
+            </motion.a>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  )
+}
+
 function Services() {
+  const introRef = useRef(null)
+  const introInView = useInView(introRef, { once: true, margin: '-100px' })
+
   return (
     <section id="servicios" className="services">
       <div className="services__gradient"></div>
-      <div className="services__intro container">
-        <h2 className="services__main-title">
+      <div className="services__intro container" ref={introRef}>
+        <motion.h2
+          className="services__main-title"
+          initial={{ opacity: 0, y: 40 }}
+          animate={introInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
           Todo lo que tu marca necesita para<br />
           <span className="accent">destacar visualmente.</span>
-        </h2>
+        </motion.h2>
       </div>
 
       {services.map((service, index) => (
-        <div key={index} className="services__item">
-          <div className="services__item-inner container">
-            <div className="services__image">
-              <img src={service.image} alt={service.title} />
-            </div>
-            <div className="services__text">
-              <h3 className="services__title">
-                {service.title}<br />
-                <span className="accent">{service.titleAccent}</span>
-              </h3>
-              <p className="services__desc">{service.description}</p>
-              <div className="services__buttons">
-                <a href="#contacto" className="services__btn services__btn--primary">
-                  Contáctanos
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </a>
-                <a href="#ourwork" className="services__btn services__btn--secondary">
-                  Ver más
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ServiceItem key={index} service={service} index={index} />
       ))}
     </section>
   )

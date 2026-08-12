@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import './Contact.css'
 
 function Contact() {
@@ -10,6 +11,9 @@ function Contact() {
     service: ''
   })
 
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -20,10 +24,15 @@ function Contact() {
   }
 
   return (
-    <section id="contacto" className="contact">
+    <section id="contacto" className="contact" ref={ref}>
       <div className="contact__gradient"></div>
       <div className="contact__container container">
-        <div className="contact__text">
+        <motion.div
+          className="contact__text"
+          initial={{ opacity: 0, x: -40 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7 }}
+        >
           <h2 className="contact__title">
             Te ayudamos a <span className="accent">capturar<br />la esencia</span> de tu proyecto
           </h2>
@@ -32,9 +41,15 @@ function Contact() {
             que necesitas para conectar con tu audiencia. Te responderemos con una
             propuesta de fotografía y video adaptada exactamente a lo que buscas transmitir.
           </p>
-        </div>
+        </motion.div>
 
-        <form className="contact__form" onSubmit={handleSubmit}>
+        <motion.form
+          className="contact__form"
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, x: 40 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
           <div className="form__row">
             <div className="form__group">
               <label htmlFor="name">Nombre y Apellido</label>
@@ -104,8 +119,15 @@ function Contact() {
             </select>
           </div>
 
-          <button type="submit" className="form__submit">Continuar</button>
-        </form>
+          <motion.button
+            type="submit"
+            className="form__submit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Continuar
+          </motion.button>
+        </motion.form>
       </div>
     </section>
   )

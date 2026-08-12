@@ -1,4 +1,8 @@
+import { motion, useInView } from 'framer-motion'
+import { useRef, useState } from 'react'
 import './OurWork.css'
+import Lightbox from './Lightbox'
+import TiltCard from './TiltCard'
 
 const photos = [
   { src: 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?w=400&h=500&fit=crop', alt: 'Proyecto 1' },
@@ -10,53 +14,98 @@ const photos = [
   { src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=500&fit=crop', alt: 'Proyecto 7' },
 ]
 
+const logos = [
+  { src: '/Logos clientes/SIDIDOM LOGO 300 .png', alt: 'SIDIDOM' },
+  { src: '/Logos clientes/Elite.png', alt: 'Elite Realty Group' },
+  { src: '/Logos clientes/PradoAltoLogo.png', alt: 'Prado Alto', large: true },
+  { src: '/Logos clientes/Cerveza.png', alt: 'Cerveza República' },
+  { src: '/Logos clientes/Dra.png', alt: 'Dra. Lisbeth Santos' },
+  { src: '/Logos clientes/Sabor.png', alt: 'Sabor de la Calle' },
+]
+
 function OurWork() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+
   return (
-    <section id="ourwork" className="ourwork">
+    <section id="ourwork" className="ourwork" ref={ref}>
       <div className="ourwork__gradient"></div>
-      <div className="ourwork__header">
+
+      <motion.div
+        className="ourwork__header"
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7 }}
+      >
         <h2 className="ourwork__title">
           <span className="accent">+20 marcas</span> confían en nuestro trabajo
         </h2>
-      </div>
+      </motion.div>
 
-      <div className="ourwork__clients">
-        <div className="ourwork__client-logo">
-          <img src="/Logos clientes/SIDIDOM LOGO 300 .png" alt="SIDIDOM" />
-        </div>
-        <div className="ourwork__client-logo">
-          <img src="/Logos clientes/Elite.png" alt="Elite Realty Group" />
-        </div>
-        <div className="ourwork__client-logo ourwork__client-logo--lg">
-          <img src="/Logos clientes/PradoAltoLogo.png" alt="Prado Alto" />
-        </div>
-        <div className="ourwork__client-logo">
-          <img src="/Logos clientes/Cerveza.png" alt="Cerveza República" />
-        </div>
-        <div className="ourwork__client-logo">
-          <img src="/Logos clientes/Dra.png" alt="Dra. Lisbeth Santos" />
-        </div>
-        <div className="ourwork__client-logo">
-          <img src="/Logos clientes/Sabor.png" alt="Sabor de la Calle" />
+      {/* Marquee infinito de logos */}
+      <div className="ourwork__marquee">
+        <div className="ourwork__marquee-track">
+          {[...logos, ...logos, ...logos].map((logo, index) => (
+            <div
+              key={index}
+              className={`ourwork__marquee-logo ${logo.large ? 'ourwork__marquee-logo--lg' : ''}`}
+            >
+              <img src={logo.src} alt={logo.alt} />
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="ourwork__gallery">
-        {photos.map((photo, index) => (
-          <div key={index} className="ourwork__photo">
-            <img src={photo.src} alt={photo.alt} />
-          </div>
-        ))}
+      <div className="ourwork__gallery-wrapper">
+        <motion.div
+          className="ourwork__gallery"
+          initial={{ x: 0 }}
+          animate={{ x: [0, -200, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+        >
+          {[...photos, ...photos].map((photo, index) => (
+            <TiltCard key={index} className="ourwork__photo">
+              <motion.div
+                whileHover={{ y: -10 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+                onClick={() => setLightboxIndex(index % photos.length)}
+                style={{ width: '100%', height: '100%' }}
+              >
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+              </motion.div>
+            </TiltCard>
+          ))}
+        </motion.div>
       </div>
 
-      <div className="ourwork__cta-wrapper">
-        <a href="#portafolio" className="ourwork__cta">
+      <motion.div
+        className="ourwork__cta-wrapper"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.6 }}
+      >
+        <motion.a
+          href="#servicios"
+          className="ourwork__cta"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           Ver nuestro trabajo
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
+
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={photos}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onChange={setLightboxIndex}
+        />
+      )}
     </section>
   )
 }
